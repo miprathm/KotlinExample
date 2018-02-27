@@ -15,5 +15,11 @@ class MainActivity : AppCompatActivity() {
         binding =DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         binding.repositoryName.text = "Modern Application"
+        binding.apply {
+            repositoryName.text = "Android Article"
+            repositoryOwner.text = "Prathm"
+            numberOfStarts.text="1000 stars"
+        }
+
     }
 }
