@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         binding =DataBindingUtil.setContentView(this,R.layout.activity_main)
 
         binding.repositoryName.text = "Modern Application"
+        var repository = Repository("Modern","Prathm",1000,true)
         binding.apply {
             repositoryName.text = "Android Article"
             repositoryOwner.text = "Prathm"
