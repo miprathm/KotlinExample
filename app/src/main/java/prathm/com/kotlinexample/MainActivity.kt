@@ -1,5 +1,6 @@
 package prathm.com.kotlinexample
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
 
-    var mainViewModel = MainViewModel()
+    //var mainViewModel = MainViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         },2000)
         */
 
-        binding.viewModel = mainViewModel
+        //binding.viewModel = mainViewModel
+        binding.viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         binding.executePendingBindings()
 
 

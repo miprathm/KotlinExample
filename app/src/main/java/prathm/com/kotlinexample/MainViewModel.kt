@@ -1,11 +1,12 @@
 package prathm.com.kotlinexample
 
+import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 
 /**
  * Created by Prathm on 2/27/2018.
  */
-class MainViewModel{
+class MainViewModel : ViewModel() {
     var repoModel : RepoModel = RepoModel()
     //var text : String =""
     //var isLoading : Boolean = false
