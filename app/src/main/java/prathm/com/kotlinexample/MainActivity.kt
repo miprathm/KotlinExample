@@ -3,6 +3,7 @@ package prathm.com.kotlinexample
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import kotlinx.android.synthetic.main.activity_main.*
 import prathm.com.kotlinexample.databinding.ActivityMainBinding
 
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =DataBindingUtil.setContentView(this,R.layout.activity_main)
 
-        binding.repositoryName.text = "Modern Application"
+        //binding.repositoryName.text = "Modern Application"
         var repository = Repository("Modern","Prathm",1000,true)
         binding.repository = repository
         binding.executePendingBindings()
@@ -22,7 +23,12 @@ class MainActivity : AppCompatActivity() {
             repositoryName.text = "Android Article"
             repositoryOwner.text = "Prathm"
             numberOfStarts.text="1000 stars"
-        }*/
+        }
+*/
+        Handler().postDelayed({
+        repository.repositoryName = "ASDF"
+        },2000)
+
 
 
     }
