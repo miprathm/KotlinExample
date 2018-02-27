@@ -16,11 +16,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.repositoryName.text = "Modern Application"
         var repository = Repository("Modern","Prathm",1000,true)
-        binding.apply {
+        binding.repository = repository
+        binding.executePendingBindings()
+        /*binding.apply {
             repositoryName.text = "Android Article"
             repositoryOwner.text = "Prathm"
             numberOfStarts.text="1000 stars"
-        }
+        }*/
+
 
     }
 }
