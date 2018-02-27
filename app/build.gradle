@@ -20,6 +20,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "default"
+
+    productFlavors {
+        finalProduction{
+            dimension "default"
+            applicationId "prathm.com.kotlinexample"
+            resValue "string", "app_name", "Modern App"
+        }
+        demoProduction{
+            dimension "default"
+            applicationId "prathm.com.kotlinexample.demoproduction"
+            resValue "string", "app_name", "Modern App Demo Prod"
+        }
+        demoTesting{
+            dimension "default"
+            applicationId "prathm.com.kotlinexample.demoproduction"
+            resValue "string", "app_name", "Modern App Demo Test"
+        }
+        mock{
+            dimension "default"
+            applicationId "prathm.com.kotlinexample.demoproduction"
+            resValue "string", "app_name", "Modern App Mock"
+        }
+    }
 }
 
 dependencies {
