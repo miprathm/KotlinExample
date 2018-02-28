@@ -1,5 +1,6 @@
 package prathm.com.kotlinexample
 
+import android.content.Context
 import android.os.Handler
 
 /**
@@ -7,20 +8,31 @@ import android.os.Handler
  * Model Part in MVVM
  */
 
-class GitRepoRepository {
+class GitRepoRepository(val netManager: NetManager){
 
     val localDataSource = GitRepoLocalDataSource()
     val remoteDataSource = GitRepoRemoteDataSource()
 
     fun getRepositories(onRepositoryReadyCallback: OnRepositoryReadyCallback) {
-        remoteDataSource.getRepositories( object : OnRepoRemoteReadyCallback {
-            override fun onRemoteDataReady(data: ArrayList<Repository>) {
-                localDataSource.saveRepositories(data)
-                onRepositoryReadyCallback.onDataReady(data)
+
+        netManager.isConnectedToInternet?.let {
+            if (it) {
+                remoteDataSource.getRepositories(object : OnRepoRemoteReadyCallback {
+                    override fun onRemoteDataReady(data: ArrayList<Repository>) {
+                        localDataSource.saveRepositories(data)
+                        onRepositoryReadyCallback.onDataReady(data)
+                    }
+                })
+            } else {
+                localDataSource.getRepositories(object : OnRepoLocalReadyCallback {
+                    override fun onLocalDataReady(data: ArrayList<Repository>) {
+                        onRepositoryReadyCallback.onDataReady(data)
+                    }
+                })
             }
+        }
 
 
-        })
     }
 }
 
