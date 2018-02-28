@@ -8,7 +8,7 @@ import android.databinding.ObservableField
  * Created by Prathm on 2/27/2018.
  */
 class MainViewModel : ViewModel() {
-    var repoModel : RepoModel = RepoModel()
+    var repoModel : GitRepoRepository = GitRepoRepository()
     //var text : String =""
     //var isLoading : Boolean = false
     val text = ObservableField<String>()
