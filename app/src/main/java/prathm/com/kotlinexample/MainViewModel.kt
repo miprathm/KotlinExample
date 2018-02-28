@@ -12,6 +12,7 @@ class MainViewModel : ViewModel() {
     //var isLoading : Boolean = false
     val text = ObservableField<String>()
     val isLoading = ObservableField<Boolean>()
+    var repositories = ArrayList<Repository>()
 
     val onDataReadyCallback = object : OnDataReadyCallback{
         override fun onDataReady(data: String) {
@@ -24,5 +25,15 @@ class MainViewModel : ViewModel() {
     fun refresh(){
         isLoading.set(true)
         repoModel.refreshData(onDataReadyCallback)
+    }
+
+    fun loadRepositories(){
+        isLoading.set(true)
+        repoModel.getReositories(object : OnRepositoryReadyCallback{
+            override fun onRepositoryReady(data: ArrayList<Repository>) {
+                isLoading.set(false)
+                repositories = data
+            }
+        })
     }
 }

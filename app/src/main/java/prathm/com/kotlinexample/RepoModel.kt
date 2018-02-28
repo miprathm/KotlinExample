@@ -14,9 +14,19 @@ class RepoModel{
             onDataReadyCallback.onDataReady("New Data")
         },2000)
     }
+    fun getReositories(onRepositoryReadyCallback: OnRepositoryReadyCallback){
+        var arrayList = ArrayList<Repository>()
+        arrayList.add(Repository("First","Ownwer1",1000,false))
+        arrayList.add(Repository("Second","Ownwer2",1000,true))
+        arrayList.add(Repository("Third","Ownwer3",1000,false))
 
+        Handler().postDelayed({ onRepositoryReadyCallback.onRepositoryReady(arrayList) },4000)
+    }
 }
 
 interface OnDataReadyCallback{
     fun onDataReady(data: String)
+}
+interface OnRepositoryReadyCallback{
+    fun onRepositoryReady(data: ArrayList<Repository>)
 }
