@@ -9,26 +9,21 @@ import android.os.Handler
 
 class GitRepoRepository {
 
-    fun refreshData(onDataReadyCallback: OnDataReadyCallback) {
-        Handler().postDelayed({
-            onDataReadyCallback.onDataReady("New Data")
-        }, 2000)
+    val localDataSource = GitRepoLocalDataSource()
+    val remoteDataSource = GitRepoRemoteDataSource()
+
+    fun getRepositories(onRepositoryReadyCallback: OnRepositoryReadyCallback) {
+        remoteDataSource.getRepositories( object : OnRepoRemoteReadyCallback {
+            override fun onRemoteDataReady(data: ArrayList<Repository>) {
+                localDataSource.saveRepositories(data)
+                onRepositoryReadyCallback.onDataReady(data)
+            }
+
+
+        })
     }
-
-    fun getReositories(onRepositoryReadyCallback: OnRepositoryReadyCallback) {
-        var arrayList = ArrayList<Repository>()
-        arrayList.add(Repository("First", "Ownwer1", 1000, false))
-        arrayList.add(Repository("Second", "Ownwer2", 1000, true))
-        arrayList.add(Repository("Third", "Ownwer3", 1000, false))
-
-        Handler().postDelayed({ onRepositoryReadyCallback.onRepositoryReady(arrayList) }, 4000)
-    }
-}
-
-interface OnDataReadyCallback {
-    fun onDataReady(data: String)
 }
 
 interface OnRepositoryReadyCallback {
-    fun onRepositoryReady(data: ArrayList<Repository>)
+    fun onDataReady(data: ArrayList<Repository>)
 }
